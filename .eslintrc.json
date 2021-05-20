@@ -19,6 +19,7 @@
         "no-unused-vars": "off",
         "no-undef": "off",
         "eqeqeq": "off",
-        "no-return-assign": "off"
+        "no-return-assign": "off",
+        "no-useless-constructor": "off"
     }
 }
