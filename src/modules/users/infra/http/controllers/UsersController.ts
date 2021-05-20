@@ -17,6 +17,7 @@ export default class UsersController {
 
   public async delete (request: Request, response: Response): Promise<Response> {
     const { id } = request.params
+    // TODO
     return response.json({
       uuid: id
     })

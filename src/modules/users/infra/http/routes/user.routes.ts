@@ -16,11 +16,9 @@ usersRouter.post('/', celebrate({
   }
 }), usersController.create)
 
-usersRouter.delete('/', celebrate({
-  [Segments.BODY]: {
-    name: Joi.string().required(),
-    email: Joi.string().email().required(),
-    password: Joi.string().required()
+usersRouter.delete('/:id', celebrate({
+  [Segments.PARAMS]: {
+    id: Joi.string().required()
   }
 }), ensureAuthenticated, usersController.delete)
 
