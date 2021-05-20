@@ -1,11 +1,7 @@
 # API-IMDB
 
-Api responsável por...
+API-IMDB - Seguindo os padrões REST e RESTfull
 
-## Aviso
-
-* Este projeto foi desenvolvido com base no projeto: [api-base-typescript](https://gitlab.com/Fortbrasil/templates/api-base-typescript).
-  
 ## Requerimentos
 
 * Git
@@ -18,7 +14,7 @@ Api responsável por...
 
 Para baixar o código fonte na sua máquina execute o comando abaixo.
 
-` $ git clone https://gitlab.com/Fortbrasil/api-mastercard-typescript.git `
+` $ git clone https://github.com/viniciusmr1499/api-imdb.git `
 
 ## Executar os testes
 
