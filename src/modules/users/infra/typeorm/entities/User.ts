@@ -1,12 +1,12 @@
 import {
-    Entity,
-    Column,
-    PrimaryGeneratedColumn,
-    UpdateDateColumn,
-    CreateDateColumn
-} from 'typeorm';
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+  CreateDateColumn
+} from 'typeorm'
 
-import { Exclude } from 'class-transformer';
+import { Exclude } from 'class-transformer'
 
 @Entity('users')
 class User {
@@ -33,4 +33,4 @@ class User {
     updated_at: Date;
 }
 
-export default User;
+export default User

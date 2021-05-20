@@ -1,11 +1,11 @@
 import {
-    Entity,
-    Column,
-    PrimaryGeneratedColumn,
-    UpdateDateColumn,
-    CreateDateColumn,
-    Generated
-} from 'typeorm';
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+  CreateDateColumn,
+  Generated
+} from 'typeorm'
 
 @Entity('user_tokens')
 export default class UserToken {
