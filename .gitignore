@@ -1,4 +1,5 @@
 coverage/
+
 # App Project
 .env
 dist/
