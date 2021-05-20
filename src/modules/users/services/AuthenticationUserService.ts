@@ -9,23 +9,23 @@ import AppError from '@shared/errors/AppError'
 import User from '@modules/users/infra/typeorm/entities/User'
 
 interface RequestDTO {
-    email: string;
-    password: string;
+  email: string;
+  password: string;
 }
 
 interface ResponseDTO {
-    user: User;
-    token: string;
+  user: User;
+  token: string;
 }
 
 @injectable()
 class AuthenticationUserService {
   constructor (
-        @inject('UsersRepository')
-        private usersRepository: IUsersRepository,
+    @inject('UsersRepository')
+    private usersRepository: IUsersRepository,
 
-        @inject('HashProvider')
-        private hashProvider: IHashProvider
+    @inject('HashProvider')
+    private hashProvider: IHashProvider
   ) {}
 
   public async execute ({ email, password }: RequestDTO):Promise<ResponseDTO> {

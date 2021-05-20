@@ -7,21 +7,21 @@ import AppError from '@shared/errors/AppError'
 import User from '../infra/typeorm/entities/User'
 
 interface IRequest {
-    user_id: string;
-    name: string;
-    email: string;
-    old_password?: string;
-    password?: string;
+  user_id: string;
+  name: string;
+  email: string;
+  old_password?: string;
+  password?: string;
 }
 
 @injectable()
 export default class UpdateProfileService {
   constructor (
-        @inject('UsersRepository')
-        private usersRepository: IUsersRepository,
+    @inject('UsersRepository')
+    private usersRepository: IUsersRepository,
 
-        @inject('HashProvider')
-        private hashProvider: IHashProvider
+    @inject('HashProvider')
+    private hashProvider: IHashProvider
   ) {}
 
   public async execute ({ user_id, name, email, password, old_password }: IRequest): Promise<User> {

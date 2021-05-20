@@ -24,6 +24,9 @@ class User {
     password: string;
 
     @Column()
+    status: number;
+
+    @Column()
     level: number;
 
     @CreateDateColumn()

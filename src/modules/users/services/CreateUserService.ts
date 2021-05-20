@@ -7,23 +7,23 @@ import { inject, injectable } from 'tsyringe'
 import User from '@modules/users/infra/typeorm/entities/User'
 
 interface RequestDTO {
-    name: string;
-    email: string;
-    password: string;
-    level: number;
+  name: string;
+  email: string;
+  password: string;
+  level: number;
 }
 
 @injectable()
 class CreateUserService {
   constructor (
-        @inject('UsersRepository')
-        private usersRepository: IUsersRepository,
+    @inject('UsersRepository')
+    private usersRepository: IUsersRepository,
 
-        @inject('HashProvider')
-        private hashProvider: IHashProvider
+    @inject('HashProvider')
+    private hashProvider: IHashProvider
   ) {}
 
-  public async execute ({ name, email, password, level }: RequestDTO):Promise<User> {
+  public async execute ({ name, email, password, level = 0 }: RequestDTO):Promise<User> {
     const userCheckExists = await this.usersRepository.findByEmail(email)
 
     if (userCheckExists) {

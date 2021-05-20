@@ -27,6 +27,7 @@ describe('UpdateProfile', () => {
       user_id: user.id
     })
 
+    expect(profile.status).toBe(1)
     expect(profile.name).toBe('John Doe')
     expect(profile.email).toBe('johndoe@example.com')
   })

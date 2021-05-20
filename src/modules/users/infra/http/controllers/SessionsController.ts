@@ -7,11 +7,8 @@ import AuthenticationUserService from '@modules/users/services/AuthenticationUse
 export default class SessionsController {
   public async create (request: Request, response: Response): Promise<Response> {
     const { email, password } = request.body
-
     const authentication = container.resolve(AuthenticationUserService)
-
     const { user, token } = await authentication.execute({ email, password })
-
     return response.json({ user: classToClass(user), token })
   }
 }
