@@ -33,7 +33,7 @@ export default function ensureAuthenticateAdmin (request: Request, response: Res
     }
 
     return next()
-  } catch {
-    throw new AppError('User is not allowed to perform this operation', 401)
+  } catch (error) {
+    throw new AppError(error.message, 401)
   }
 }
