@@ -31,35 +31,6 @@ class MoviesRepository implements IMoviesRepository {
     }
   }
 
-  // public async findByName (name: string): Promise <Movie[] | undefined> {
-  //   const movie = this.ormRepository.find({
-  //     where: { name }
-  //   })
-
-  //   return movie
-  // }
-
-  // public async findByDirector (director: string): Promise <Movie[] | undefined> {
-  //   const movie = this.ormRepository.find({
-  //     where: { director }
-  //   })
-
-  //   return movie
-  // }
-
-  // public async findByGenre (genre: string): Promise <Movie[] | undefined> {
-  //   const movie = this.ormRepository.find({
-  //     where: { genre }
-  //   })
-
-  //   return movie
-  // }
-
-  // public async findAll (): Promise <Movie[]> {
-  //   const movies = this.ormRepository.find()
-  //   return movies
-  // }
-
   public async create ({ name, director, description, genre }: ICreateMoviesDTO): Promise<Movie> {
     const movie = this.ormRepository.create({
       name,
