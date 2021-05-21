@@ -18,18 +18,47 @@ class MoviesRepository implements IMoviesRepository {
     ) {
       const movies = this.ormRepository.find()
       return movies
+    } else {
+      const movies = this.ormRepository
+        .createQueryBuilder('movies')
+        .select(['name', 'genre', 'director', 'created_at'])
+        .where('name = :name', { name })
+        .orWhere('director = :director', { director })
+        .orWhere('genre = :genre', { genre })
+        .getRawMany()
+
+      return movies
     }
-
-    const movies = this.ormRepository
-      .createQueryBuilder('movies')
-      .select()
-      .where('movies.name = :name', { name })
-      .orWhere('movies.director = :director', { director })
-      .orWhere('movies.genre = :genre', { genre })
-      .getRawMany()
-
-    return movies
   }
+
+  // public async findByName (name: string): Promise <Movie[] | undefined> {
+  //   const movie = this.ormRepository.find({
+  //     where: { name }
+  //   })
+
+  //   return movie
+  // }
+
+  // public async findByDirector (director: string): Promise <Movie[] | undefined> {
+  //   const movie = this.ormRepository.find({
+  //     where: { director }
+  //   })
+
+  //   return movie
+  // }
+
+  // public async findByGenre (genre: string): Promise <Movie[] | undefined> {
+  //   const movie = this.ormRepository.find({
+  //     where: { genre }
+  //   })
+
+  //   return movie
+  // }
+
+  // public async findAll (): Promise <Movie[]> {
+  //   const movies = this.ormRepository.find()
+  //   return movies
+  // }
 
   public async create ({ name, director, description, genre }: ICreateMoviesDTO): Promise<Movie> {
     const movie = this.ormRepository.create({

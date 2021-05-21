@@ -10,6 +10,14 @@ const moviesController = new MoviesController()
 
 movieRouter.use(ensureAuthenticatedAdmin)
 
+movieRouter.get('/', celebrate({
+  [Segments.BODY]: {
+    name: Joi.string(),
+    director: Joi.string(),
+    genre: Joi.string(),
+    description: Joi.string()
+  }
+}), moviesController.index)
 movieRouter.post('/', celebrate({
   [Segments.BODY]: {
     name: Joi.string().required(),
