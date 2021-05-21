@@ -21,6 +21,7 @@
         "eqeqeq": "off",
         "no-return-assign": "off",
         "no-useless-constructor": "off",
-        "no-mixed-operators": "off"
+        "no-mixed-operators": "off",
+        "array-callback-return": "off"
     }
 }

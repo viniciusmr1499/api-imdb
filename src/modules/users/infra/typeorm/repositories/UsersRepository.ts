@@ -12,7 +12,7 @@ export default class UsersRepository implements IUsersRepository {
       this.ormRepository = getRepository(User)
     }
 
-    public async findAll (): Promise<User[]> {
+    public async findAll (): Promise<User[] | undefined> {
       const users = this.ormRepository.find({
         where: {
           status: 1
