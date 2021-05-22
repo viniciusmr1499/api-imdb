@@ -16,12 +16,12 @@ class MoviesRepository implements IMoviesRepository {
       director === undefined && name === undefined && genre === undefined ||
       director === '' && name === '' && genre === ''
     ) {
-      const movies = this.ormRepository.find()
+      const movies = await this.ormRepository.find()
       return movies
     } else {
       const movies = this.ormRepository
         .createQueryBuilder('movies')
-        .select(['name', 'genre', 'director', 'created_at'])
+        .select('*')
         .where('name = :name', { name })
         .orWhere('director = :director', { director })
         .orWhere('genre = :genre', { genre })
@@ -31,6 +31,11 @@ class MoviesRepository implements IMoviesRepository {
     }
   }
 
+  public async findById (id: string): Promise<Movie | undefined> {
+    const movie = await this.ormRepository.findOne(id)
+    return movie
+  }
+
   public async create ({ name, director, description, genre }: ICreateMoviesDTO): Promise<Movie> {
     const movie = this.ormRepository.create({
       name,
@@ -38,9 +43,7 @@ class MoviesRepository implements IMoviesRepository {
       description,
       genre
     })
-
     await this.ormRepository.save(movie)
-
     return movie
   }
 

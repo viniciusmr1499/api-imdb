@@ -12,7 +12,7 @@ interface IRequestDTO {
 }
 
 @injectable()
-class GetMovieService {
+class GetMoviesService {
   constructor (
     @inject('MoviesRepository')
     private moviesRepository: IMoviesRepository,
@@ -37,4 +37,4 @@ class GetMovieService {
   }
 }
 
-export default GetMovieService
+export default GetMoviesService

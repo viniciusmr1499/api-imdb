@@ -2,11 +2,13 @@ import { Router } from 'express'
 import { celebrate, Joi, Segments } from 'celebrate'
 
 import MoviesController from '../controllers/MoviesController'
+import VotationsController from '../controllers/VotationsController'
 
 import ensureAuthenticatedAdmin from '@modules/movies/infra/http/middlewares/ensureAuthenticateAdmin'
 
 const movieRouter = Router()
 const moviesController = new MoviesController()
+const votationsController = new VotationsController()
 
 movieRouter.use(ensureAuthenticatedAdmin)
 
@@ -26,5 +28,13 @@ movieRouter.post('/', celebrate({
     description: Joi.string().required()
   }
 }), moviesController.create)
+movieRouter.post('/votations/:id', celebrate({
+  [Segments.PARAMS]: {
+    id: Joi.string().required()
+  },
+  [Segments.BODY]: {
+    voting: Joi.number().required()
+  }
+}), votationsController.create)
 
 export default movieRouter

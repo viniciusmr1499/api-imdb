@@ -4,6 +4,7 @@ import IGetMoviesDTO from '../dtos/IGetMoviesDTO'
 
 export default interface IUsersRepository {
   find(data: IGetMoviesDTO): Promise<Movie[] | Movie | undefined>
+  findById(id: string): Promise<Movie | undefined>
   create(data: ICreateMoviesDTO): Promise<Movie>
   save(movie: Movie): Promise<Movie>
 }

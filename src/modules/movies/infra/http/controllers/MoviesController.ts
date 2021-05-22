@@ -1,14 +1,14 @@
 import { container } from 'tsyringe'
 import { Response, Request } from 'express'
 import CreateMovieService from '@modules/movies/services/CreateMovieService'
-import GetMovieService from '@modules/movies/services/GetMovieService'
+import GetMoviesService from '@modules/movies/services/GetMoviesService'
 
 class MoviesController {
   public async index (request: Request, response: Response): Promise<Response> {
     const { director, name, genre } = request.query
-    const getMovie = container.resolve(GetMovieService)
+    const getMovies = container.resolve(GetMoviesService)
     const user_id = request.user.id
-    const movies = await getMovie.execute({
+    const movies = await getMovies.execute({
       name,
       director,
       genre,
