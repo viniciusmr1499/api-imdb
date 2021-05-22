@@ -9,7 +9,7 @@ export default class UsersController {
   public async index (_: Request, response: Response): Promise<Response> {
     const getUserService = container.resolve(GetUserService)
     const users = await getUserService.execute()
-    return response.json(users)
+    return response.json(classToClass(users))
   }
 
   public async create (request: Request, response: Response): Promise<Response> {

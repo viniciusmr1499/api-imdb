@@ -1,24 +1,19 @@
-import AppError from '@shared/errors/AppError'
-
 import IUsersRepository from '@modules/users/repositories/IUsersRepository'
-import IHashProvider from '../providers/HashProvider/models/IHashProvider'
 import { inject, injectable } from 'tsyringe'
 
 import User from '@modules/users/infra/typeorm/entities/User'
+import AppError from '@shared/errors/AppError'
 
 @injectable()
 class GetUserService {
   constructor (
     @inject('UsersRepository')
-    private usersRepository: IUsersRepository,
+    private usersRepository: IUsersRepository
 
-    @inject('HashProvider')
-    private hashProvider: IHashProvider
   ) {}
 
-  public async execute ():Promise<User[]> {
+  public async execute ():Promise<User[] | undefined> {
     const users = await this.usersRepository.findAll()
-
     return users
   }
 }
