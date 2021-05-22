@@ -2,6 +2,10 @@
 
 API-IMDB - Seguindo os padrões REST e RESTfull
 
+## Aviso
+- Criar uma pasta na raiz do projeto com a seguinte estrutura "docker/volumes/postgres"
+- A collection está localizado na pasta data (raiz do projeto)
+
 ## Requerimentos
 
 * Git
