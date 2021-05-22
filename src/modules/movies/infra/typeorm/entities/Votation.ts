@@ -21,6 +21,9 @@ class Votation {
     @Column()
     quantity: number;
 
+    @Column()
+    previous_vote: number;
+
     @CreateDateColumn()
     created_at: Date;
 

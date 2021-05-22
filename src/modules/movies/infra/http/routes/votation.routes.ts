@@ -3,12 +3,12 @@ import { celebrate, Joi, Segments } from 'celebrate'
 
 import VotationsController from '../controllers/VotationsController'
 
-import ensureAuthenticatedAdmin from '@modules/movies/infra/http/middlewares/ensureAuthenticateAdmin'
+import ensureAuthenticateUserCommon from '@modules/movies/infra/http/middlewares/ensureAuthenticateUserCommon'
 
 const movieRouter = Router()
 const votationsController = new VotationsController()
 
-movieRouter.use(ensureAuthenticatedAdmin)
+movieRouter.use(ensureAuthenticateUserCommon)
 
 movieRouter.post('/:id', celebrate({
   [Segments.PARAMS]: {

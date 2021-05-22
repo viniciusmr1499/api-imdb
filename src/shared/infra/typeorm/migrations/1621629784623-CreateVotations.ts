@@ -18,6 +18,10 @@ export class CreateVotations1621629784623 implements MigrationInterface {
             type: 'int'
           },
           {
+            name: 'previous_vote',
+            type: 'int'
+          },
+          {
             name: 'created_at',
             type: 'timestamp',
             default: 'now()'
