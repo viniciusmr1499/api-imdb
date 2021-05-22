@@ -1,0 +1,14 @@
+coverage/
+
+# App Project
+.env
+dist/
+node_modules
+tsconfig.tsbuildinfo
+docker/volumes/postgres/*
+
+# IDE's
+.idea
+
+# Others
+*.log
