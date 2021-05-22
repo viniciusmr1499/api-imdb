@@ -5,12 +5,13 @@ import VotationsController from '../controllers/VotationsController'
 
 import ensureAuthenticateUserCommon from '@modules/movies/infra/http/middlewares/ensureAuthenticateUserCommon'
 
-const movieRouter = Router()
+const votationRouter = Router()
 const votationsController = new VotationsController()
 
-movieRouter.use(ensureAuthenticateUserCommon)
+votationRouter.use(ensureAuthenticateUserCommon)
 
-movieRouter.post('/:id', celebrate({
+votationRouter.get('/', votationsController.index)
+votationRouter.post('/:id', celebrate({
   [Segments.PARAMS]: {
     id: Joi.string().required()
   },
@@ -19,4 +20,4 @@ movieRouter.post('/:id', celebrate({
   }
 }), votationsController.create)
 
-export default movieRouter
+export default votationRouter
