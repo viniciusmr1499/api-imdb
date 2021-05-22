@@ -3,4 +3,5 @@ export default interface ICreateMoviesDTO {
   director: string
   description: string
   genre: string
+  total_votes: number
 }

@@ -1,18 +1,23 @@
 import { inject, injectable } from 'tsyringe'
+
 import IMoviesRepository from '../repositories/IMoviesRepository'
 import IUsersRepository from '@modules/users/repositories/IUsersRepository'
+
 import AppError from '@shared/errors/AppError'
 import IVotationsRepository from '../repositories/IVotationsRepository'
-import Votation from '../infra/typeorm/entities/Votation'
 
 interface IRequestDTO {
-  user_id: string
   movie_id: string
-  voting: number
+  user_id: string
+}
+
+interface IResponse {
+  movie: any
+  average: number
 }
 
 @injectable()
-class CreateVotationsService {
+class MovieDetailsService {
   constructor (
     @inject('MoviesRepository')
     private moviesRepository: IMoviesRepository,
@@ -24,10 +29,7 @@ class CreateVotationsService {
     private votationsRepository: IVotationsRepository
   ) {}
 
-  public async execute ({ user_id, movie_id, voting }: IRequestDTO): Promise<Votation> {
-    if (voting > 4) {
-      throw new AppError('voting number not can be more than 4')
-    }
+  public async execute ({ movie_id, user_id }: IRequestDTO): Promise<IResponse | undefined> {
     const user = await this.usersRepository.findById(user_id)
     if (user?.status === 0) {
       throw new AppError('This operation could not be performed')
@@ -38,25 +40,18 @@ class CreateVotationsService {
       throw new AppError('Invalid movie ID')
     }
 
-    const userAlreadyVoted = await this.votationsRepository.findByUserId(String(user?.id))
-    if (userAlreadyVoted) {
-      // TODO
-      console.log(userAlreadyVoted)
-    }
-    const votationExists = await this.votationsRepository.findByMovieId(movie_id)
-    if (votationExists) {
-      votationExists.quantity += voting
-      await this.votationsRepository.save(votationExists)
-      return votationExists
+    const votations = await this.votationsRepository.findByMovieId(movie_id)
+    const accumulatedVotes = votations.reduce((prevVal, elem) => {
+      return prevVal + elem.value_voting
+    }, 0)
+
+    const result: IResponse = {
+      movie,
+      average: accumulatedVotes === 0 ? 0 : Number((accumulatedVotes / movie.total_votes).toFixed(1))
     }
 
-    const votation = await this.votationsRepository.create({
-      movie_id,
-      user_id,
-      voting
-    })
-    return votation
+    return result
   }
 }
 
-export default CreateVotationsService
+export default MovieDetailsService

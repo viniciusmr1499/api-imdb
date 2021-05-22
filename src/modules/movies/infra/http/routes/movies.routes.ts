@@ -3,11 +3,10 @@ import { celebrate, Joi, Segments } from 'celebrate'
 
 import MoviesController from '../controllers/MoviesController'
 import ensureAuthenticatedAdmin from '@modules/movies/infra/http/middlewares/ensureAuthenticateAdmin'
+import ensureAuthenticated from '@modules/users/infra/http/middlewares/ensureAuthenticated'
 
 const movieRouter = Router()
 const moviesController = new MoviesController()
-
-movieRouter.use(ensureAuthenticatedAdmin)
 
 movieRouter.get('/', celebrate({
   [Segments.BODY]: {
@@ -16,7 +15,12 @@ movieRouter.get('/', celebrate({
     genre: Joi.string(),
     description: Joi.string()
   }
-}), moviesController.index)
+}), ensureAuthenticated, moviesController.index)
+movieRouter.get('/:movie_id', celebrate({
+  [Segments.BODY]: {
+    movie_id: Joi.string().required()
+  }
+}), ensureAuthenticated, moviesController.show)
 movieRouter.post('/', celebrate({
   [Segments.BODY]: {
     name: Joi.string().required(),
@@ -24,6 +28,6 @@ movieRouter.post('/', celebrate({
     genre: Joi.string().required(),
     description: Joi.string().required()
   }
-}), moviesController.create)
+}), ensureAuthenticatedAdmin, moviesController.create)
 
 export default movieRouter

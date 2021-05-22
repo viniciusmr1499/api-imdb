@@ -2,6 +2,7 @@ import { container } from 'tsyringe'
 import { Response, Request } from 'express'
 import CreateMovieService from '@modules/movies/services/CreateMovieService'
 import GetMoviesService from '@modules/movies/services/GetMoviesService'
+import MovieDetailsService from '@modules/movies/services/MovieDetailsService'
 
 class MoviesController {
   public async index (request: Request, response: Response): Promise<Response> {
@@ -28,6 +29,17 @@ class MoviesController {
       description,
       genre,
       user_id
+    })
+    return response.json(movie)
+  }
+
+  public async show (request: Request, response: Response): Promise<Response> {
+    const { movie_id } = request.params
+    const movieDetails = container.resolve(MovieDetailsService)
+    const user_id = request.user.id
+    const movie = await movieDetails.execute({
+      user_id,
+      movie_id
     })
     return response.json(movie)
   }

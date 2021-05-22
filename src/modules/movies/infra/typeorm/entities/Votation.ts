@@ -19,10 +19,7 @@ class Votation {
     movie_votations_id: string;
 
     @Column()
-    quantity: number;
-
-    @Column()
-    previous_vote: number;
+    value_voting: number;
 
     @CreateDateColumn()
     created_at: Date;

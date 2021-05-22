@@ -6,9 +6,9 @@ import authConfig from '@config/auth'
 import AppError from '@shared/errors/AppError'
 
 interface TokenPayload {
-    iat: number;
-    exp: number;
-    sub: string;
+  iat: number;
+  exp: number;
+  sub: string;
 }
 
 export default function ensureAuthenticated (request: Request, response: Response, next: NextFunction):void {

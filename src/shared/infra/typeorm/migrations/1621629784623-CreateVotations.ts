@@ -14,11 +14,7 @@ export class CreateVotations1621629784623 implements MigrationInterface {
             default: 'uuid_generate_v4()'
           },
           {
-            name: 'quantity',
-            type: 'int'
-          },
-          {
-            name: 'previous_vote',
+            name: 'value_voting',
             type: 'int'
           },
           {

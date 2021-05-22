@@ -36,12 +36,13 @@ class MoviesRepository implements IMoviesRepository {
     return movie
   }
 
-  public async create ({ name, director, description, genre }: ICreateMoviesDTO): Promise<Movie> {
+  public async create ({ name, director, description, genre, total_votes }: ICreateMoviesDTO): Promise<Movie> {
     const movie = this.ormRepository.create({
       name,
       director,
       description,
-      genre
+      genre,
+      total_votes
     })
     await this.ormRepository.save(movie)
     return movie

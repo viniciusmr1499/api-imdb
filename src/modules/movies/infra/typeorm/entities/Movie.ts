@@ -23,6 +23,9 @@ class Movie {
     @Column()
     genre: string;
 
+    @Column()
+    total_votes: number;
+
     @CreateDateColumn()
     created_at: Date;
 

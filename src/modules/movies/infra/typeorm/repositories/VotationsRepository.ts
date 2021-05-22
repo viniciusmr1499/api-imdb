@@ -11,10 +11,25 @@ class VotationsRepository implements IVotationsRepository {
       this.ormRepository = getRepository(Votation)
     }
 
-    public async findByMovieId (movie_id: string): Promise<Votation | undefined> {
-      const votation = await this.ormRepository.findOne({
+    public async find (): Promise<Votation[]> {
+      const votations = await this.ormRepository.find()
+      return votations
+    }
+
+    public async findByMovieId (movie_id: string): Promise<Votation[]> {
+      const votation = await this.ormRepository.find({
         where: {
           movie_votations_id: movie_id
+        }
+      })
+      return votation
+    }
+
+    public async findByVotes (user_id: string, movie_id: string): Promise<Votation | undefined> {
+      const votation = await this.ormRepository.findOne({
+        where: {
+          movie_votations_id: movie_id,
+          user_votations_id: user_id
         }
       })
       return votation
@@ -33,7 +48,7 @@ class VotationsRepository implements IVotationsRepository {
       const votation = this.ormRepository.create({
         movie_votations_id: movie_id,
         user_votations_id: user_id,
-        quantity: voting
+        value_voting: voting
       })
 
       await this.ormRepository.save(votation)

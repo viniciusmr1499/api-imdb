@@ -32,7 +32,8 @@ class CreateMovieService {
       name,
       director,
       genre,
-      description
+      description,
+      total_votes: 0
     })
 
     return movie

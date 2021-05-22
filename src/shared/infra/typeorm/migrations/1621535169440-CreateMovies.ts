@@ -30,6 +30,11 @@ export class CreateMovies1621535169440 implements MigrationInterface {
             type: 'varchar'
           },
           {
+            name: 'total_votes',
+            type: 'int',
+            isNullable: true
+          },
+          {
             name: 'created_at',
             type: 'timestamp',
             default: 'now()'
